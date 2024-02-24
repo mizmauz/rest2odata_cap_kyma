@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rest2odata 
+  labels:
+    app: rest2odata 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rest2odata 
+  template:
+    metadata:
+      labels: # labels to select/identify the deployment
+        app: rest2odata  
+    spec:     # pod spec                  
+      containers: 
+      - image: mizmauzdocker/rest2odata:0.0.1 # image we pushed
+        name: rest2odata  
+        imagePullPolicy: Always
+        ports:
+        - name: http
+          containerPort: 9004
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rest2odata 
+  labels:
+    app: rest2odata
+spec:
+  ports:
+  - name: http
+    port: 9004
+    targetPort: 9004
+  selector:
+    app: rest2odata 

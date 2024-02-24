@@ -1,0 +1,60 @@
+{
+    "name": "odatafiori",
+    "version": "1.0.0",
+    "description": "A simple CAP project.",
+    "repository": "<Add your repository here>",
+    "license": "UNLICENSED",
+    "private": true,
+    "dependencies": {
+        "@cap-js-community/odata-v2-adapter": "^1.12.2",
+        "@sap-cloud-sdk/http-client": "^2.6.0",
+        "@sap/cds": "^7",
+        "express": "^4",
+        "sqlite3": "^5.0.2"
+    },
+    "devDependencies": {
+        "@sap-cloud-sdk/http-client": "^3.1.1",
+        "@sap/low-code-event-handler": "1.2.4",
+        "sqlite3": "^5.0.2"
+    },
+    "scripts": {
+        "start": "npx cds-serve --port 9005",
+        "build": "cds build"
+      },
+      "engines": {
+        "node": "^18.00.0k"
+      },
+    "cds": {
+
+            "fiori": {
+              "lean_draft": false
+         },
+        "requires": {
+            "MeterReadingService": {
+                "kind": "odata",
+                "model": "srv/external/MeterReadingService",
+                "credentials": {
+                    "url": "http://rest2odata.default.svc.cluster.local:9004/odata/v4/MeterReading"
+                }
+            },
+            "db": {
+                "kind": "sqlite",
+                "credentials": {
+                  "database": ":memory:"
+                }
+            },
+            "features": {
+              "in_memory_db": true
+            },
+            "app-service": {
+                "impl": "@sap/low-code-event-handler"
+            },
+
+             "cov2ap" : {
+             "plugin" : true
+             }
+
+
+        }
+    }
+}

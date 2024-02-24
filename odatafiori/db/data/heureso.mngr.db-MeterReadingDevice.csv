@@ -1,0 +1,4 @@
+id;meternumber;description;installDateTime;obis_code;meterreading_id
+1;OSK12345;Sample;2023-05-22T08:00:00.000Z;1-1.8.0;1
+2;OSK12346;Sample;2023-05-22T08:00:00.000Z;1-1.8.0;2
+3;OSK1;Sample;2023-05-22T08:00:00.000Z;1-1.8.0;3

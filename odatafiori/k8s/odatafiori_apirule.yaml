@@ -1,0 +1,22 @@
+apiVersion: gateway.kyma-project.io/v1beta1
+kind: APIRule
+metadata:
+  name: odatafiori
+spec:
+  gateway: kyma-gateway.kyma-system.svc.cluster.local
+  host: odatafiori.c-49f58db.kyma.ondemand.com
+  service:
+    name: odatafiori
+    port: 9005
+  rules:
+  - accessStrategies:
+    - config: {}
+      handler: noop
+    methods:
+    - GET
+    - POST
+    - PUT
+    - PATCH
+    - DELETE
+    - HEAD
+    path: /.*

@@ -1,0 +1,12 @@
+###
+GET http://localhost:9005/odata/v4/event/$metadata
+
+###
+GET http://localhost:9005/odata/v4/event/MeterReadingDevice
+
+###
+GET http://localhost:9005/odata/v4/event/MeterReading?$select=id
+
+###
+GET http://localhost:9005/odata/v4/event/MeterReading(id=2)/name
+

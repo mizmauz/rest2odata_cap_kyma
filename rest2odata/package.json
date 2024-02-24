@@ -1,0 +1,53 @@
+{
+  "name": "rest2odata",
+  "version": "1.0.0",
+  "description": "heureso rest2odata convert a rest to a odata service",
+  "repository": "<Add your repository here>",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@sap/cds": "^7",
+    "express": "^4"
+  },
+  "devDependencies": {
+    "sqlite3": "^5",
+    "@sap-cloud-sdk/http-client": "^3.1.1"
+  },
+  "scripts": {
+    "start": "npx cds-serve --port 9004"
+  },
+    "cds" : {
+        "requires": {
+            "db": {
+                "[development]": {
+                    "kind": "sqlite",
+                    "model": "db",
+                    "credentials": {
+                        "database": ":memory:"
+                    }
+                },
+                "[production]": {
+                    "kind": "sqlite",
+                    "model": "db",
+                    "credentials": {
+                        "database": ":memory:"
+                    }
+                },
+                "model": [
+                    "db",
+                    "srv"
+                ]
+            },
+            "MeterReadingAPI": {
+                "kind": "rest",
+                "credentials": {
+                    "url": "http://quarkuskafkaservice.default.svc.cluster.local:9003/consumption"
+                }
+            }
+        },
+        "features": {
+            "fiori_preview": false,
+            "in_memory_db": true
+        }
+    }
+}

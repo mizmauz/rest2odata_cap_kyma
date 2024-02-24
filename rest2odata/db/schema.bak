@@ -1,0 +1,18 @@
+namespace heureso.db;
+
+entity MeterReading {
+    key id : String(100);
+    meternumber : String(30);
+    reading_date : String(10);
+    reading_time: String(10);
+    readingsource: String(10);
+    readingreason: String(10);
+    unitofreading: String(3);
+    readingamount: String(100);
+    readingamount_estimated: String(10);
+    calc_consumption: String(10);
+    calc_days: String(10);
+    weight: String(10);
+    readingstatus: String(10);
+    errorcode: String(10);
+}

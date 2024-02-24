@@ -1,0 +1,69 @@
+{
+ "meta": {
+  "creator": "cds-dk 7.0.0"
+ },
+ "$version": "2.0",
+ "definitions": {
+  "MeterReadingService.MeterReading": {
+   "kind": "entity",
+   "@cds.external": true,
+   "@cds.persistence.skip": true,
+   "elements": {
+    "id": {
+     "key": true,
+     "type": "cds.Integer64",
+     "notNull": true
+    },
+    "meternumber": {
+     "type": "cds.String",
+     "length": 30
+    },
+    "reading_date": {
+     "type": "cds.Date"
+    },
+    "reading_time": {
+     "type": "cds.Time"
+    },
+    "readingsource": {
+     "type": "cds.String",
+     "length": 10
+    },
+    "readingreason": {
+     "type": "cds.String",
+     "length": 10
+    },
+    "unitofreading": {
+     "type": "cds.String",
+     "length": 3
+    },
+    "readingamount": {
+     "type": "cds.Double"
+    },
+    "readingamount_estimated": {
+     "type": "cds.Double"
+    },
+    "calc_consumption": {
+     "type": "cds.Double"
+    },
+    "calc_days": {
+     "type": "cds.Integer"
+    },
+    "weight": {
+     "type": "cds.Double"
+    },
+    "readingstatus": {
+     "type": "cds.String",
+     "length": 10
+    },
+    "errorcode": {
+     "type": "cds.String",
+     "length": 10
+    }
+   }
+  },
+  "MeterReadingService": {
+   "kind": "service",
+   "@cds.external": true
+  }
+ }
+}

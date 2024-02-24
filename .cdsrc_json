@@ -1,0 +1,17 @@
+{
+  "odata": {
+    "flavor": "x2"
+  },
+  "cov2ap" : {
+    "plugin" : true
+    },
+  "requires": {
+    "MeterReadingAPI": {
+      "kind": "rest",
+      "impl": "srv/external/MeterQuarkusApi.js",
+      "credentials": {
+        "url": "http://localhost:8080/meter"
+      }
+    }
+  }
+}

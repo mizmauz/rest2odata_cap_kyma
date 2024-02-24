@@ -1,0 +1,6 @@
+###
+GET http://localhost:9004/odata/v4/MeterReading/$metadata
+
+###
+GET http://localhost:9004/odata/v4/MeterReading/MeterReading
+

@@ -1,0 +1,156 @@
+using heureso.mngr.db as db from '../db/schema';
+
+@path: 'event'
+service EventService {
+@odata.draft.enabled
+entity MeterReadingEvent as projection on db.MeterReadingEvent;
+
+annotate MeterReadingEvent with {
+ID            @(
+Common: {
+Label: 'ID',
+Text : {
+$value                : name,
+![@UI.TextArrangement]: #TextOnly,
+}
+},
+UI    : {Hidden: true}
+);
+name          @(Common: {Label: 'Name'});
+description   @(Common: {Label: 'Description'});
+startDateTime @(Common: {Label: 'Start'});
+endDateTime   @(Common: {Label: 'End'});
+capacity      @(Common: {Label: 'Capacity'});
+meterreading  @(Common: {
+Label                   : 'MeterNumber',
+Text                    : {
+$value                : meterreading.meternumber,
+![@UI.TextArrangement]: #TextOnly,
+},
+ValueList               : {
+$Type         : 'Common.ValueListType',
+CollectionPath: 'MeterReading',
+Parameters    : [
+{
+    $Type            : 'Common.ValueListParameterInOut',
+    LocalDataProperty: meterreading_id,
+    ValueListProperty: 'id',
+},
+{
+    $Type            : 'Common.ValueListParameterDisplayOnly',
+    ValueListProperty: 'meternumber',
+},
+{
+    $Type            : 'Common.ValueListParameterDisplayOnly',
+    ValueListProperty: 'reading_date',
+}
+]
+},
+ValueListWithFixedValues: false
+});
+};
+
+annotate MeterReadingEvent @(Capabilities: {
+SearchRestrictions: {
+$Type     : 'Capabilities.SearchRestrictionsType',
+Searchable: true
+},
+Insertable        : true,
+Deletable         : true,
+Updatable         : true
+});
+
+annotate MeterReadingEvent @(UI: {
+UpdateHidden       : false,
+DeleteHidden       : false,
+CreateHidden       : false,
+Identification     : [{Value: name}],
+HeaderInfo         : {
+$Type         : 'UI.HeaderInfoType',
+TypeName      : 'MeterReadingEvent',
+TypeNamePlural: 'MeterReadingEvents',
+Title         : {
+$Type: 'UI.DataField',
+Value: name
+},
+Description   : {
+$Type: 'UI.DataField',
+Value: description
+}
+},
+LineItem           : [
+{
+$Type: 'UI.DataField',
+Value: name
+},
+{
+$Type: 'UI.DataField',
+Value: description
+},
+{
+$Type: 'UI.DataField',
+Value: startDateTime
+},
+{
+$Type: 'UI.DataField',
+Value: endDateTime
+},
+{
+$Type: 'UI.DataField',
+Value: capacity
+},
+{
+$Type: 'UI.DataField',
+Value: meterreading_id
+}
+],
+SelectionFields    : [
+name,
+startDateTime,
+endDateTime,
+meterreading_id
+],
+FieldGroup #General: {
+$Type: 'UI.FieldGroupType',
+Data : [
+{
+$Type: 'UI.DataField',
+Value: startDateTime
+},
+{
+$Type: 'UI.DataField',
+Value: endDateTime
+},
+{
+$Type: 'UI.DataField',
+Value: capacity
+},
+{
+$Type: 'UI.DataField',
+Value: meterreading_id
+}
+]
+},
+Facets             : [{
+$Type : 'UI.ReferenceFacet',
+ID    : 'General',
+Label : 'General',
+Target: '@UI.FieldGroup#General'
+}]
+});
+
+annotate db.MeterReading with {
+id       @(
+Common: {
+Label: 'ID',
+Text : {
+$value                : meternumber,
+![@UI.TextArrangement]: #TextOnly,
+}
+},
+UI    : {Hidden: true}
+);
+meternumber @(Common: {Label: 'MeterNumber'});
+reading_date  @(Common: {Label: 'ReadingDate'});
+};
+}
