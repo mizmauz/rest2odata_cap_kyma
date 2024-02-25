@@ -1,18 +1,20 @@
-# CAP Services to translate a REST Quarkus into a ODATA on CAP
-
+# CAP Services to translate a REST Quarkus into a ODATA deployed KYMA
+l
 This tutorial describes, how to translate the REST Service of the Quarkus application ( see previous blog [A Quarkus REST Service] (https://community.sap.com/t5/open-source-blogs/sending-and-receiving-kafka-messages-using-quarkus-and-kyma/ba-p/13583287 ) into a ODATA Service. )
 
 We are using a CAP Service and an SQLITE Database to store the result of the REST Call. The ODATA service is exposed automatically from the cds schema/service.
 
+See the project on Github [rest2odata_cap_kyma](https://github.com/mizmauz/rest2odata_cap_kyma)
+
 ![Image](./rest2odata.png)
 
-The project has to subfolders:
+The project has two subfolders:
 - rest2odata 
     SAP CAP stateless service which calls the REST and transforms to ODATA (V4)
 - odatafiori 
-    Another CAP service with a database that joins the database of the rest service and displays the complete data set. 
+    Another CAP service with a database that joins its local table with the table on the odata service (rest2odata) and displays the complete data set. 
 
-In the end, there will be three separate pods ( including the Quarkus Kafka REST ) which depend on each other.
+In the end, there will be three separate PODs on KYMA ( including the Quarkus Kafka REST ) which depend on each other.
 
 ## Getting Started
 
@@ -110,9 +112,9 @@ Automated generation of a Service based on the .edmx file. This will be used for
 cds compile srv -s heureso.srv.MeterReadingService -2 edmx > MeterReadingService.edmx && mv MeterReadingService.edmx .. && cd ..
 ```
 
-### Test the service
+### Understanding ODATA
 For basic unterstanding of ODATA see here a good explanation (OData Description)[https://cap.cloud.sap/docs/advanced/odata]
-
+In essence, all the tags in the service description are translated into the ODATA using annotations of ODATA itself or SAP specific annotations, which are used for the user interface, searching etc.
 
 ## odatafiori ( ODATA Client with Fiori)
 The odatafiori is a another cup service, which holds the second part of the data model ( MeterReadingDevice). This 
@@ -124,6 +126,8 @@ The odatafiori is a another cup service, which holds the second part of the data
 - [/srv/service.cds](./odatafiori/srv/service.cds) Definition of Service
     Definition of the ODATA Service for MeterReadingDevice
     Fiori annotations for MeterReadingDevice and MeterReading
+
+    See this page for details on the fiorio annotations: https://cap.cloud.sap/docs/advanced/odata#example
 
 - [package.json](./odatafiori/package.json) Holds the path to the other odata service
     Destination for MeterReading
