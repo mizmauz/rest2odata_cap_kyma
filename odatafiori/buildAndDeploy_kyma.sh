@@ -6,7 +6,7 @@ cp ./db/data/*.csv ./gen/srv/db/data
 
 docker build -f ./docker/Dockerfile -t mizmauzdocker/odatafiori:0.0.1 .
 
-docker login -u mizmauzdocker -p 1602Emil! # !! Enter your own user here
+docker login -u <your username> -p <your password> # !! Enter your own user here
 docker push mizmauzdocker/odatafiori:0.0.1
 
 export KUBECONFIG="$HOME/.kube/config"
